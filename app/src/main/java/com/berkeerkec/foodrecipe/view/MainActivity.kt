@@ -1,10 +1,11 @@
-package com.berkeerkec.foodrecipe
+package com.berkeerkec.foodrecipe.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.berkeerkec.foodrecipe.R
 import com.berkeerkec.foodrecipe.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
