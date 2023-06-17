@@ -8,8 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.berkeerkec.foodrecipe.databinding.RecipesRowBinding
 import com.berkeerkec.foodrecipes.model.Result
+import com.bumptech.glide.RequestManager
+import javax.inject.Inject
 
-class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.RecipeViewHolder>() {
+class RecipesAdapter @Inject constructor(
+    private val glide : RequestManager
+): RecyclerView.Adapter<RecipesAdapter.RecipeViewHolder>() {
 
     class RecipeViewHolder(val binding : RecipesRowBinding) : ViewHolder(binding.root)
 
@@ -53,7 +57,7 @@ class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.RecipeViewHolder>() {
         }else{
 
         }
-
+        glide.load(result.image).into(holder.binding.recipeImageView)
 
     }
 }
