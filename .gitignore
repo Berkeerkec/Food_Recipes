@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-Constant.kt
+src/main/java/com/berkeerkec/foodrecipe/util/Constant.kt
