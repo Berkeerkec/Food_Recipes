@@ -1,11 +1,14 @@
 package com.berkeerkec.foodrecipe.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.berkeerkec.foodrecipe.R
 import com.berkeerkec.foodrecipe.databinding.RecipesRowBinding
 import com.berkeerkec.foodrecipes.model.Result
 import com.bumptech.glide.RequestManager
@@ -52,10 +55,9 @@ class RecipesAdapter @Inject constructor(
         holder.binding.favoriteTextView.text = result.aggregateLikes.toString()
         holder.binding.clockTextView.text = result.readyInMinutes.toString()
 
-        if (result.vegan == true){
-
-        }else{
-
+        if (result.vegan){
+            holder.binding.leafTextView.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.green))
+            holder.binding.leafImageView.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.green))
         }
         glide.load(result.image).into(holder.binding.recipeImageView)
 
