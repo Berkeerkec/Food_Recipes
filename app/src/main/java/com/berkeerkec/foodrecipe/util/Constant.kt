@@ -3,6 +3,14 @@ package com.berkeerkec.foodrecipe.util
 class Constant {
     companion object{
         const val BASE_URL = "https://api.spoonacular.com"
-        const val API_KEY = "498ce8465d654b98a2f4f1af5deda947"
+        const val API_KEY = "API_KEY"
+
+        //API Query Keys
+        const val QUERY_NUMBER = "number"
+        const val QUERY_API_KEY = "apiKey"
+        const val QUERY_TYPE = "type"
+        const val QUERY_DIET = "diet"
+        const val QUERY_ADD_RECIPE_INFORMATION = "addRecipeInformation"
+        const val QUERY_FILL_INGREDIENTS = "fillIngredients"
     }
 }

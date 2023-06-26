@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="4dp"
@@ -16,6 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:strokeColor="@color/lightMediumGray"
         app:strokeWidth="1dp">
 
@@ -48,6 +49,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/recipe_imageView"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -73,10 +75,9 @@
                 android:layout_marginBottom="36dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/favorite_textView"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/favorite_textView"
                 app:layout_constraintTop_toBottomOf="@+id/description_textView"
-                app:layout_constraintVertical_bias="0.259"
+                app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/image_favorite"
                 app:tint="@color/red" />
 
@@ -84,9 +85,10 @@
                 android:id="@+id/favorite_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
                 android:text="100"
-                android:textColor="@color/red"
                 android:textAlignment="center"
+                android:textColor="@color/red"
                 app:layout_constraintStart_toStartOf="@+id/description_textView"
                 app:layout_constraintTop_toBottomOf="@+id/fovorite_imageView" />
 
@@ -94,9 +96,8 @@
                 android:id="@+id/clock_imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/clock_textView"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/clock_textView"
+                app:layout_constraintEnd_toStartOf="@+id/leaf_imageView"
+                app:layout_constraintStart_toEndOf="@+id/fovorite_imageView"
                 app:layout_constraintTop_toTopOf="@+id/fovorite_imageView"
                 app:srcCompat="@drawable/image_time"
                 app:tint="@color/yellow" />
@@ -105,11 +106,11 @@
                 android:id="@+id/clock_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
                 android:text="100"
-                android:textColor="@color/yellow"
                 android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@+id/favorite_textView"
+                android:textColor="@color/yellow"
+                app:layout_constraintEnd_toEndOf="@+id/clock_imageView"
+                app:layout_constraintStart_toStartOf="@+id/clock_imageView"
                 app:layout_constraintTop_toBottomOf="@+id/clock_imageView" />
 
             <ImageView
@@ -125,10 +126,10 @@
                 android:id="@+id/leaf_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:text="100"
+                android:layout_marginEnd="5dp"
+                android:text="vegan"
                 android:textAlignment="center"
-                app:layout_constraintStart_toEndOf="@+id/clock_textView"
+                app:layout_constraintEnd_toEndOf="@+id/description_textView"
                 app:layout_constraintTop_toBottomOf="@+id/leaf_imageView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

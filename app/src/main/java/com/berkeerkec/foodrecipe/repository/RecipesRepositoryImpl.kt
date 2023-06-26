@@ -3,6 +3,7 @@ package com.berkeerkec.foodrecipe.repository
 import com.berkeerkec.foodrecipe.api.FoodRecipesApi
 import com.berkeerkec.foodrecipe.util.Resource
 import com.berkeerkec.foodrecipes.model.FoodRecipe
+import retrofit2.Response
 import javax.inject.Inject
 
 class RecipesRepositoryImpl @Inject constructor(
@@ -25,4 +26,5 @@ class RecipesRepositoryImpl @Inject constructor(
             Resource.Error("No Data!", null)
         }
     }
+
 }
