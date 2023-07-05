@@ -37,8 +37,8 @@ android {
         viewBinding true
     }
 }
-def nav_version = "2.5.3"
-def room_version = "2.5.1"
+def nav_version = "2.6.0"
+def room_version = "2.5.2"
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
