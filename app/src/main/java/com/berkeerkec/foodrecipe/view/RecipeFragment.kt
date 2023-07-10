@@ -58,12 +58,15 @@ class RecipeFragment @Inject constructor(
                 is Resource.Success -> {
                     fragmentBinding?.shimmerFrameLayout?.visibility = View.GONE
                     fragmentBinding?.recyclerView?.visibility = View.VISIBLE
+                    fragmentBinding?.relativeLayout?.visibility = View.VISIBLE
+                    fragmentBinding?.filterButton?.visibility = View.VISIBLE
                     response.data.let {
                         adapter.results = it?.results!!
                     }
                 }
                 is Resource.Error -> {
                     fragmentBinding?.shimmerFrameLayout?.visibility = View.GONE
+                    fragmentBinding?.relativeLayout?.visibility = View.VISIBLE
                     Toast.makeText(requireContext(), response.message?.toString(), Toast.LENGTH_LONG).show()
                 }
                 is Resource.Loading -> {

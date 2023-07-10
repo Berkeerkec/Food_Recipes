@@ -1,70 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.RecipeFragment">
 
-    <TextView
-        android:id="@+id/textView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraitLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="77dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/courgette"
-        android:text="Recipes"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="26sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@drawable/recipes_title"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
-
-        <EditText
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_toStartOf="@+id/filterButton"
-            android:background="@drawable/searchbar_background"
-            android:drawableStart="@drawable/search_image"
-            android:drawablePadding="7dp"
-            android:hint="Search"
-            android:maxLines="1"
-            android:padding="10dp"
-            android:textSize="20sp" />
+            android:background="@drawable/recipes_title"
+            android:fontFamily="@font/courgette"
+            android:padding="2dp"
+            android:text="Recipes"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/filterButton"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/filter_background"
-            android:padding="12dp"
-            android:src="@drawable/ic_filter" />
+            app:layout_anchor="@id/recyclerView"
+            android:visibility="visible"
+            android:padding="4dp">
 
-    </RelativeLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_toStartOf="@+id/filterButton"
+                android:layout_alignParentStart="true"
+                android:background="@drawable/searchbar_background"
+                android:drawableStart="@drawable/search_image"
+                android:drawablePadding="7dp"
+                android:hint="Search"
+                android:maxLines="1"
+                android:padding="8dp" />
+
+            <ImageButton
+                android:id="@+id/filterButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_anchorGravity="bottom|right"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/filter_background"
+                android:padding="12dp"
+                android:src="@drawable/ic_filter"/>
+
+        </RelativeLayout>
+    </LinearLayout>
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerFrameLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="90dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,17 +98,8 @@
 
             <include layout="@layout/placeholder_row" />
 
+
         </LinearLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
