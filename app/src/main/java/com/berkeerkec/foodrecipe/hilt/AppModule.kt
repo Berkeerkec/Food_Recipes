@@ -2,11 +2,13 @@ package com.berkeerkec.foodrecipe.hilt
 
 import android.content.Context
 import android.widget.ImageView
+import androidx.room.Room
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.berkeerkec.foodrecipe.R
 import com.berkeerkec.foodrecipe.api.FoodRecipesApi
 import com.berkeerkec.foodrecipe.repository.RecipesRepository
 import com.berkeerkec.foodrecipe.repository.RecipesRepositoryImpl
+import com.berkeerkec.foodrecipe.roomdb.RecipesDatabase
 import com.berkeerkec.foodrecipe.util.Constant.Companion.BASE_URL
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -61,4 +63,12 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRepository(api : FoodRecipesApi) = RecipesRepositoryImpl(api) as RecipesRepository
+
+    @Singleton
+    @Provides
+    fun provideDatabase(@ApplicationContext context: Context) = Room.databaseBuilder(context,RecipesDatabase::class.java, "recipes_database").build()
+
+    @Singleton
+    @Provides
+    fun provideRecipesdao(database : RecipesDatabase) = database.recipesDao()
 }

@@ -1,5 +1,6 @@
 package com.berkeerkec.foodrecipe.roomdb
 
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.berkeerkec.foodrecipes.model.FoodRecipe
