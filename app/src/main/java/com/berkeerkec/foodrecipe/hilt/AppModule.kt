@@ -6,8 +6,11 @@ import androidx.room.Room
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.berkeerkec.foodrecipe.R
 import com.berkeerkec.foodrecipe.api.FoodRecipesApi
+import com.berkeerkec.foodrecipe.repository.LocalDataRepository
+import com.berkeerkec.foodrecipe.repository.LocalDataRepositoryImpl
 import com.berkeerkec.foodrecipe.repository.RecipesRepository
 import com.berkeerkec.foodrecipe.repository.RecipesRepositoryImpl
+import com.berkeerkec.foodrecipe.roomdb.RecipesDao
 import com.berkeerkec.foodrecipe.roomdb.RecipesDatabase
 import com.berkeerkec.foodrecipe.util.Constant.Companion.BASE_URL
 import com.bumptech.glide.Glide
@@ -71,4 +74,8 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRecipesdao(database : RecipesDatabase) = database.recipesDao()
+
+    @Singleton
+    @Provides
+    fun provideLocalRepository(dao : RecipesDao) = LocalDataRepositoryImpl(dao) as LocalDataRepository
 }

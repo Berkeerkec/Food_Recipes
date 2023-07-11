@@ -5,7 +5,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.*
+import com.berkeerkec.foodrecipe.repository.LocalDataRepository
 import com.berkeerkec.foodrecipe.repository.RecipesRepository
+import com.berkeerkec.foodrecipe.roomdb.RecipesEntity
 import com.berkeerkec.foodrecipe.util.Constant
 import com.berkeerkec.foodrecipe.util.Constant.Companion.QUERY_ADD_RECIPE_INFORMATION
 import com.berkeerkec.foodrecipe.util.Constant.Companion.QUERY_API_KEY
@@ -17,6 +19,7 @@ import com.berkeerkec.foodrecipe.util.Resource
 import com.berkeerkec.foodrecipes.model.FoodRecipe
 import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -24,6 +27,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RecipesViewModel @Inject constructor(
     private val repo : RecipesRepository,
+    private val localRepo : LocalDataRepository,
     application : Application
 ): AndroidViewModel(application) {
 
@@ -33,6 +37,12 @@ class RecipesViewModel @Inject constructor(
 
     init {
         getRecipes(applyQueries())
+    }
+
+    val readRecipes : LiveData<List<RecipesEntity>> = localRepo.readDatabase().asLiveData()
+
+    private fun insertRecipes(recipesEntity : RecipesEntity) = viewModelScope.launch(Dispatchers.IO) {
+        localRepo.insertRecipes(recipesEntity)
     }
 
     private fun applyQueries() : HashMap<String,String>{
@@ -58,10 +68,21 @@ class RecipesViewModel @Inject constructor(
             viewModelScope.launch {
                 var response = repo.getRecipes(queries)
                 recipes.value = response
+
+                val foodRecipe = recipes.value!!.data
+
+                if (foodRecipe != null){
+                    offlineCacheRecipe(foodRecipe)
+                }
             }
         }else{
             recipes.value = Resource.Error("No internet connection")
         }
+    }
+
+    private fun offlineCacheRecipe(foodRecipe: FoodRecipe) {
+        val recipesEntity = RecipesEntity(foodRecipe)
+        insertRecipes(recipesEntity)
     }
 
 
