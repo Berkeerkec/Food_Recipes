@@ -16,6 +16,7 @@ import com.berkeerkec.foodrecipe.adapters.RecipesAdapter
 import com.berkeerkec.foodrecipe.databinding.FragmentRecipeBinding
 import com.berkeerkec.foodrecipe.util.Constant.Companion.API_KEY
 import com.berkeerkec.foodrecipe.util.Resource
+import com.berkeerkec.foodrecipe.util.observeOnce
 import com.berkeerkec.foodrecipe.viewmodel.RecipesViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -58,7 +59,7 @@ class RecipeFragment @Inject constructor(
     private fun readDatabase() {
 
         lifecycleScope.launch {
-            viewModel.readRecipes.observe(viewLifecycleOwner, Observer {database ->
+            viewModel.readRecipes.observeOnce(viewLifecycleOwner, Observer {database ->
 
                 if (database.isNotEmpty()){
                     adapter.results = database[0].foodRecipe.results
