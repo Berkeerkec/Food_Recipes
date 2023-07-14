@@ -9,7 +9,11 @@
         android:id="@+id/recipeFragment"
         android:name="com.berkeerkec.foodrecipe.view.RecipeFragment"
         android:label="fragment_recipe"
-        tools:layout="@layout/fragment_recipe" />
+        tools:layout="@layout/fragment_recipe" >
+        <action
+            android:id="@+id/action_recipeFragment_to_recipesBottomSheet"
+            app:destination="@id/recipesBottomSheet" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.berkeerkec.foodrecipe.view.FavoriteFragment"
@@ -20,4 +24,13 @@
         android:name="com.berkeerkec.foodrecipe.view.JokeFragment"
         android:label="fragment_joke"
         tools:layout="@layout/fragment_joke" />
+    <dialog
+        android:id="@+id/recipesBottomSheet"
+        android:name="com.berkeerkec.foodrecipe.view.bottomsheet.RecipesBottomSheet"
+        android:label="recipes_bottom_sheet"
+        tools:layout="@layout/recipes_bottom_sheet" >
+        <action
+            android:id="@+id/action_recipesBottomSheet_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
+    </dialog>
 </navigation>

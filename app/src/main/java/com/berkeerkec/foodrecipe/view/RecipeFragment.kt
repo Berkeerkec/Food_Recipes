@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.berkeerkec.foodrecipe.R
 import com.berkeerkec.foodrecipe.adapters.RecipesAdapter
@@ -53,7 +54,10 @@ class RecipeFragment @Inject constructor(
 
         readDatabase()
 
+        binding.filterButton.setOnClickListener {
 
+            findNavController().navigate(R.id.action_recipeFragment_to_recipesBottomSheet)
+        }
     }
 
     private fun readDatabase() {
