@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.*
+import com.berkeerkec.foodrecipe.repository.DataStoreRepository
 import com.berkeerkec.foodrecipe.repository.LocalDataRepository
 import com.berkeerkec.foodrecipe.repository.RecipesRepository
 import com.berkeerkec.foodrecipe.roomdb.RecipesEntity
@@ -23,6 +24,7 @@ import com.berkeerkec.foodrecipes.model.FoodRecipe
 import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -31,8 +33,21 @@ import javax.inject.Inject
 class RecipesViewModel @Inject constructor(
     private val repo : RecipesRepository,
     private val localRepo : LocalDataRepository,
+    private val dataStoreRepository: DataStoreRepository,
     application : Application
 ): AndroidViewModel(application) {
+
+    /** DataStore **/
+
+    private var mealType = DEFAULT_MEAL_TYPE
+    private var dietType = DEFAULT_DIET_TYPE
+
+    val readMealAndDietType = dataStoreRepository.readMealAndDietType
+
+    fun saveMealAndDietType(mealType : String, mealTypeId : Int, dietType : String, dietTypeId : Int) = viewModelScope.launch {
+        dataStoreRepository.saveMealAndDietType(mealType,mealTypeId,dietType,dietTypeId)
+    }
+
 
     private val recipes = MutableLiveData<Resource<FoodRecipe>>()
     val recipe : LiveData<Resource<FoodRecipe>>
@@ -42,14 +57,24 @@ class RecipesViewModel @Inject constructor(
         getRecipes(applyQueries())
     }
 
+    /** Room Database **/
     val readRecipes : LiveData<List<RecipesEntity>> = localRepo.readDatabase().asLiveData()
 
     private fun insertRecipes(recipesEntity : RecipesEntity) = viewModelScope.launch(Dispatchers.IO) {
         localRepo.insertRecipes(recipesEntity)
     }
 
+    /** Retrofit **/
     private fun applyQueries() : HashMap<String,String>{
         val queries : HashMap<String,String> = HashMap()
+
+        viewModelScope.launch {
+            readMealAndDietType.collect{ value ->
+                mealType = value.selectedMealType
+                dietType = value.selectedDietType
+            }
+        }
+
         queries[QUERY_NUMBER] = DEFAULT_RECIPES_NUMBER
         queries[QUERY_API_KEY] = Constant.API_KEY
         queries[QUERY_TYPE] = DEFAULT_MEAL_TYPE

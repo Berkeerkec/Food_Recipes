@@ -12,14 +12,16 @@ import com.berkeerkec.foodrecipe.util.Constant.Companion.PREFERENCES_MEAL_TYPE
 import com.berkeerkec.foodrecipe.util.Constant.Companion.PREFERENCES_MEAL_TYPE_ID
 import com.berkeerkec.foodrecipe.util.Constant.Companion.PREFERENCES_NAME
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
 
-private val Context.dataStore by preferencesDataStore(PREFERENCES_NAME)
 
+private val Context.dataStore by preferencesDataStore(PREFERENCES_NAME)
+@ViewModelScoped
 class DataStoreRepository @Inject constructor(
     @ApplicationContext private val context : Context
 ) {
